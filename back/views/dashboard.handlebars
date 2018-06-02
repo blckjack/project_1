@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin panel</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    
+  </head>
+<body>
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills float-right">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/viewusers/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/viewusers/register">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/viewusers/Logout">Logout</a>
+            </li>
+          </ul>
+        </nav>
+    </div>
+</div>
+<hr>
+<div class="container">
+    <div class="row">
+        <h1>Adding new post</h1>
+        <hr>
+        <form action="/posts" method="POST" enctype="multipart/form-data">
+            <div class="file-field input-field">
+                <input name="myImage" type="file" multiple>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+            <input type="text" name="title">
+            <input type="text" name="content">
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

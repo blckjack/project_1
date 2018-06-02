@@ -1,0 +1,59 @@
+version: '2'
+services:  
+  nginx:
+    build: ./nginx
+    volumes:
+    - datavolume:/usr/share/nginx/html/
+    ports:
+    - "80:80"
+    - "443:443"
+    networks:
+      avangard:
+        ipv4_address: 172.18.0.4
+    command: nginx -g "daemon off;"
+    depends_on:
+    - front
+  
+  front:
+    build: ./front
+    volumes:
+    - datavolume:/usr/share/nginx/html/
+    networks:
+      avangard:
+        ipv4_address: 172.18.0.3
+    depends_on:
+    - back
+  
+  back:
+    build: ./back
+    ports:
+    - "3012:3012"
+    networks:
+      avangard:
+        ipv4_address: 172.18.0.2
+    command: node server.js
+    depends_on:
+    - db
+  
+  db:
+    build: ./db
+    ports:
+    - "27017:27017"
+    volumes:
+    - ./data/db:/data/db
+    networks:
+      avangard:
+        ipv4_address: 172.18.0.1
+    command:
+      mongod --bind_ip 127.0.0.1,172.18.0.1
+
+networks:
+  avangard:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.18.0.0/24
+        gateway: 172.18.0.254
+
+volumes:
+  datavolume: {}
